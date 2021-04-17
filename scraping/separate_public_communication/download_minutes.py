@@ -3,15 +3,15 @@ import os
 import requests
 import time
 
-YEAR = 2020
-PDF_TYPE = 'Agenda Packet' if YEAR != 2020 else 'Minutes'
+YEAR = 2019
+PDF_TYPE = 'Agenda Packet' if YEAR != 2019 else 'Minutes'
 
 def find_target_text(text):
     return (
-                (text.find("<a href=") > 0 and text.find('<a href="javascript:void(0)') == -1) 
-                and 
+                (text.find("<a href=") > 0 and text.find('<a href="javascript:void(0)') == -1)
+                and
                 (
-                    (text.find('<div class="RowLink">') > 0 and text.find('Cancelled') == -1) or 
+                    (text.find('<div class="RowLink">') > 0 and text.find('Cancelled') == -1) or
                     text.find(f'>{PDF_TYPE}</a>') > 0
                 )
             )
@@ -35,7 +35,7 @@ def drop_empty_href_and_corresponding_name(file_name_and_file_path_set):
 def remove_cntl_char(meeting_name):
     for chars in [(":&#09;", ""), ("&#13;", ""), ("MBoard", "M "), ("Type", " ")]:
         meeting_name = meeting_name.replace(chars[0], chars[1])
-        
+
     return meeting_name
 
 def get_meeting_name(meeting_html):
