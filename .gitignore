@@ -10,3 +10,4 @@ __pycache__/
 each_public_comment_pdf/
 get_public_comment_improve.log
 junk/
+/venv/**/*
