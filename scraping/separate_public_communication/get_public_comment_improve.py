@@ -10,7 +10,7 @@ import traceback
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 import get_address
-import get_sentence_list as get_sentence_list 
+import get_sentence_list as get_sentence_list
 import get_specific_data_from_metadata as get_spe_data
 import get_read_file_list as grfl
 import process
@@ -112,7 +112,7 @@ def transform_comment_data_set(comment_data_set):
         comment_data['address'] = []
         comment_data['address'].extend(get_address.get_address(text_comments))
         comment_data['address'].extend(get_spe_data.get_address(comment_data['summary']))
-        
+
     return {
         comment_data['comment_number']: {
                 'summary': comment_data['summary'],
@@ -150,6 +150,7 @@ def log_traceback(ex, ex_traceback, pdf_file):
 def main():
 
     pdf_file_list = get_read_file_list(DIRECTORY)
+    print(pdf_file_list)
     all_comment_data_set = {}
 
     if not os.path.isdir('each_public_comment_pdf'):
@@ -199,7 +200,7 @@ def main():
                         comment_data_set[index]['public_comment_path'] = f'each_public_comment/{comment_data_set[index]["comment_number"].strip()}.txt'
                         index = ''
                         scraping_start = False
-                    
+
                     elif scraping_start:
                         comment_data_set[index]['summary'] += f" {word['word']}"
 
@@ -245,6 +246,3 @@ if __name__ == '__main__':
     #                file1.write(f'{word_set}\n')
     #            file1.write(f'\n')
     #file1.close()
-                    
-
-
